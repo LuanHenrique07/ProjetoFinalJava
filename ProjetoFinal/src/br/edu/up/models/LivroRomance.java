@@ -1,16 +1,20 @@
 package br.edu.up.models;
 
-import java.sql.Date;
-
 public class LivroRomance extends Livro {
 
-    public LivroRomance(String nome, int iD, String genero, Date lancamento) {
-        super(nome, iD, genero, lancamento);
+    public LivroRomance(String nome, int id, String genero, int lancamento, String Autor) {
+        super(id,nome, genero, lancamento, Autor);
     }
 
     @Override
+    public String toString() {
+        return "LivroAcao [nome=" + Nome + ", Genero=" + Genero + ", Lancamento=" + Lancamento + ", Autor="
+                + Autor;
+    }
+    
+    @Override
     public String toCSV() {
-        throw new UnsupportedOperationException("Unimplemented method 'toCSV'");
+        return Nome + ";" + Genero + ";" + Lancamento + ";" + Autor;
     }
 
 }
