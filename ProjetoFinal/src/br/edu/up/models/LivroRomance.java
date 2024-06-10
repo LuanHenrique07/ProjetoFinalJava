@@ -8,7 +8,7 @@ public class LivroRomance extends Livro {
 
     @Override
     public String toString() {
-        return "LivroAcao [nome=" + Nome + ", Genero=" + Genero + ", Lancamento=" + Lancamento + ", Autor="
+        return "Livro de Romance [nome=" + Nome + ", Genero=" + Genero + ", Lancamento=" + Lancamento + ", Autor="
                 + Autor;
     }
     
