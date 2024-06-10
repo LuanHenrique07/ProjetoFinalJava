@@ -1,183 +1,142 @@
 package br.edu.up.view;
 
-import br.edu.up.models.*;
-
-import java.util.List;
-
 import br.edu.up.Prompt;
+import br.edu.up.models.*;
 
 public class TelaPrincipal {
 
     public void mostrarMenuPrincipal() {
-
         int op = 0;
 
         do {
-
             Prompt.limparConsole();
             Prompt.separador();
             Prompt.imprimir("MENU PRINCIPAL");
             Prompt.separador();
 
-            Prompt.imprimir("1. Incluir LIVROS");
-            Prompt.imprimir("2. Incluir cliente empresa");
-            Prompt.imprimir("3. Mostrar dados cliente pessoa");
-            Prompt.imprimir("4. Mostrar dados cliente empresa");
-            Prompt.imprimir("5. Mostrar todos os clientes");
-            Prompt.imprimir("6. Emprestar");
-            Prompt.imprimir("7. Devolver");
-            Prompt.imprimir("8. Sair");
+            Prompt.imprimir("1. Incluir Livros");
+            Prompt.imprimir("2. Listar Livros");
+            Prompt.imprimir("3. Sair");
 
             op = Prompt.lerInteiro();
 
             switch (op) {
                 case 1:
-                    IncluirLivros();
+                    incluirLivro();
+                    Prompt.imprimir("Livro incluído com sucesso!");
+                    break;
+                case 2:
+                    listarLivros();
                     break;
             }
-            //     case 3:
-                    
-            //     case 5:
-            //         // 5. Mostrar todos os clientes
-            //         Prompt.separador();
-            //         Prompt.imprimir("LISTA DE CLIENTES");
-            //         List<Cliente> clientes = controle.getClientes();
-            //         for (Cliente cliente : clientes) {
-            //             Prompt.imprimir(cliente);
-            //         }
-            //         Prompt.pressionarEnter();
-            //         break;
-            //     case 6:
-            //         // 6. Emprestar
-            //         menuEmprestar();
-            //         break;
-            // }
 
-            } while (op != 8);
+        } while (op != 3);
+
+        Prompt.imprimir("Saindo...");
+    }
+
+    private void listarLivros() {
+        // TODO Auto-generated method stub
+    }
+
+    private void incluirLivro() {
+        int opcao = 0;
+
+        do {
+            Prompt.limparConsole();
+            Prompt.separador();
+            Prompt.imprimir("INCLUIR LIVRO");
+            Prompt.separador();
+
+            Prompt.imprimir("Selecione o gênero do livro:");
+            Prompt.imprimir("1. Ação");
+            Prompt.imprimir("2. Comédia");
+            Prompt.imprimir("3. Romance");
+            Prompt.imprimir("4. Terror");
+            Prompt.imprimir("5. Voltar");
+
+            opcao = Prompt.lerInteiro();
+
+            switch (opcao) {
+                case 1:
+                    incluirLivroAcao();
+                    break;
+                case 2:
+                    incluirLivroComedia();
+                    break;
+                case 3:
+                    incluirLivroRomance();
+                    break;
+                case 4:
+                    incluirLivroTerror();
+                    break;
+            }
+
+        } while (opcao != 5);
 
     }
 
-    private void IncluirLivros(){
-        int op1 = 0;
+    private void incluirLivroAcao() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("INCLUIR LIVRO DE AÇÃO");
+        Prompt.separador();
 
-        Prompt.imprimir("1. Incluir Livro de Ação");
-            Prompt.imprimir("2. Incluir Livro de Comédia");
-            Prompt.imprimir("3. Incluir Livro de Romance");
-            Prompt.imprimir("4. Incluir Livro de Terror");
-            
+        int id = Prompt.lerInteiro("Digite o ID:");
+        String nome = Prompt.lerLinha("Digite o nome do livro:");
+        String genero = "Ação";
+        int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
+        String autor = Prompt.lerLinha("Digite o autor:");
 
-            op1 = Prompt.lerInteiro();
-
-        switch (op1) {
-            case 1:
-                IncluirLivrosAcao();
-                break;
-            case 2:
-                IncluirLivrosComedia();
-                break;
-            case 3:
-                IncluirLivrosRomance();
-                break;
-            case 4:
-                IncluirLivrosTerror();
-                break;
-        }
+        Livro livro = new LivroAcao(nome, id, genero, lancamento, autor);
+        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
     }
 
-
-    private void IncluirLivrosTerror() {
-
+    private void incluirLivroComedia() {
+        Prompt.limparConsole();
         Prompt.separador();
-        Prompt.imprimir("MENU INCLUIR LIVRO TERROR");
+        Prompt.imprimir("INCLUIR LIVRO DE COMÉDIA");
         Prompt.separador();
 
-        Prompt.imprimir("Digite o ID:");
-        int ID = Prompt.lerInteiro();
+        int id = Prompt.lerInteiro("Digite o ID:");
+        String nome = Prompt.lerLinha("Digite o nome do livro:");
+        String genero = "Comédia";
+        int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
+        String autor = Prompt.lerLinha("Digite o autor:");
 
-        Prompt.imprimir("Digite o nome do livro;");
-        String Nome = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o genero:");
-        String Genero = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o Lancamento:");
-        int Lancamento = Prompt.lerInteiro();
-
-        Prompt.imprimir("Digite o Autor:");
-        String Autor = Prompt.lerLinha();
-
-        Livro livro = new LivroTerror(Nome, ID, Genero, Lancamento, Autor);
+        Livro livro = new LivroComedia(nome, id, genero, lancamento, autor);
+        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
     }
 
-    private void IncluirLivrosAcao() {
-
+    private void incluirLivroRomance() {
+        Prompt.limparConsole();
         Prompt.separador();
-        Prompt.imprimir("MENU INCLUIR LIVRO ACAO");
+        Prompt.imprimir("INCLUIR LIVRO DE ROMANCE");
         Prompt.separador();
 
-        Prompt.imprimir("Digite o ID:");
-        int ID = Prompt.lerInteiro();
+        int id = Prompt.lerInteiro("Digite o ID:");
+        String nome = Prompt.lerLinha("Digite o nome do livro:");
+        String genero = "Romance";
+        int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
+        String autor = Prompt.lerLinha("Digite o autor:");
 
-        Prompt.imprimir("Digite o nome do livro;");
-        String Nome = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o genero:");
-        String Genero = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o Lancamento:");
-        int Lancamento = Prompt.lerInteiro();
-
-        Prompt.imprimir("Digite o Autor:");
-        String Autor = Prompt.lerLinha();
-
-        Livro livro = new LivroAcao(Nome, ID, Genero, Lancamento, Autor);
+        Livro livro = new LivroRomance(nome, id, genero, lancamento, autor);
+        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
     }
 
-    private void IncluirLivrosComedia() {
-
+    private void incluirLivroTerror() {
+        Prompt.limparConsole();
         Prompt.separador();
-        Prompt.imprimir("MENU INCLUIR LIVRO COMEDIA");
-        Prompt.separador();
-
-        Prompt.imprimir("Digite o ID:");
-        int ID = Prompt.lerInteiro();
-
-        Prompt.imprimir("Digite o nome do livro;");
-        String Nome = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o genero:");
-        String Genero = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o Lancamento:");
-        int Lancamento = Prompt.lerInteiro();
-
-        Prompt.imprimir("Digite o Autor:");
-        String Autor = Prompt.lerLinha();
-
-        Livro livro = new LivroComedia(Nome, ID, Genero, Lancamento, Autor);
-    }
-
-    private void IncluirLivrosRomance() {
-
-        Prompt.separador();
-        Prompt.imprimir("MENU INCLUIR LIVRO ROMANCE");
+        Prompt.imprimir("INCLUIR LIVRO DE TERROR");
         Prompt.separador();
 
-        Prompt.imprimir("Digite o ID:");
-        int ID = Prompt.lerInteiro();
+        int id = Prompt.lerInteiro("Digite o ID:");
+        String nome = Prompt.lerLinha("Digite o nome do livro:");
+        String genero = "Terror";
+        int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
+        String autor = Prompt.lerLinha("Digite o autor:");
 
-        Prompt.imprimir("Digite o nome do livro;");
-        String Nome = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o genero:");
-        String Genero = Prompt.lerLinha();
-
-        Prompt.imprimir("Digite o Lancamento:");
-        int Lancamento = Prompt.lerInteiro();
-
-        Prompt.imprimir("Digite o Autor:");
-        String Autor = Prompt.lerLinha();
-
-        Livro livro = new LivroRomance(Nome, ID, Genero, Lancamento, Autor);
+        Livro livro = new LivroTerror(nome, id, genero, lancamento, autor);
+        // Adicionar livro
     }
 }
