@@ -16,8 +16,8 @@ import br.edu.up.models.LivroRomance;
 
 public class LivroCsvDAO implements LivroDAO {
 
-    private String header = "ID;Nome;Genero;Lancamento;Autor";
-    private String nomeDoArquivo;
+    private String header = "";
+    private String nomeDoArquivo = "C:\\Users\\autologon\\Desktop";
 
     public LivroCsvDAO(String nomeDoArquivo) {
         this.nomeDoArquivo = nomeDoArquivo;
