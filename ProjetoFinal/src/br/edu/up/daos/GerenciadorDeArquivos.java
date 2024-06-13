@@ -16,9 +16,9 @@ import br.edu.up.models.Livro;
 public class GerenciadorDeArquivos {
 
     private String header = ""; // Defina seu cabeçalho CSV
-    private String nomeDoArquivoLivros = "C:\\Users\\autologon\\Desktop\\livros.csv";
-    private String nomeDoArquivoClientes = "C:\\Users\\autologon\\Desktop\\clientes.csv";
-    private String nomeDoArquivoFuncionarios = "C:\\Users\\autologon\\Desktop\\funcionarios.csv";
+    private String nomeDoArquivoLivros = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
+    private String nomeDoArquivoClientes = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
+    private String nomeDoArquivoFuncionarios = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
 
     public List<Cliente> getClientes() {
 

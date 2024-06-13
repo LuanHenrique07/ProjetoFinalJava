@@ -1,5 +1,7 @@
 package br.edu.up.view;
 
+import java.util.List;
+
 import br.edu.up.Prompt;
 import br.edu.up.controller.ControleDeClientes;
 import br.edu.up.models.Cliente;
@@ -39,21 +41,21 @@ public class TelaPrincipal {
                     Prompt.imprimir("Livro incluído com sucesso!");
                     break;
                 case 2:
-                    // implementar listagem de livros
+                    listarLivros();
                     break;
                 case 3:
                     adicionarCliente();
                     Prompt.imprimir("Cliente adicionado com sucesso!");
                     break;
                 case 4:
-                    // implementar listagem de clientes
+                    listarClientes();
                     break;
                 case 5:
                     adicionarFuncionario();
                     Prompt.imprimir("Funcionario adicionado com sucesso!");
                     break;
                 case 6:
-                    // implementar listagem de funcionários
+                    listarFuncionarios();
                     break;
             }
 
@@ -186,5 +188,41 @@ public class TelaPrincipal {
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
         controleDeClientes.adicionarFuncionario(funcionario);
+    }
+
+    private void listarLivros() {
+        List<Livro> livros = controleDeClientes.getLivros();
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("LISTA DE LIVROS");
+        Prompt.separador();
+        for (Livro livro : livros) {
+            Prompt.imprimir(livro.toString());
+        }
+        Prompt.pressionarEnter();
+    }
+
+    private void listarClientes() {
+        List<Cliente> clientes = controleDeClientes.getClientes();
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("LISTA DE CLIENTES");
+        Prompt.separador();
+        for (Cliente cliente : clientes) {
+            Prompt.imprimir(cliente.toString());
+        }
+        Prompt.pressionarEnter();
+    }
+
+    private void listarFuncionarios() {
+        List<Funcionario> funcionarios = controleDeClientes.getFuncionarios();
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("LISTA DE FUNCIONÁRIOS");
+        Prompt.separador();
+        for (Funcionario funcionario : funcionarios) {
+            Prompt.imprimir(funcionario.toString());
+        }
+        Prompt.pressionarEnter();
     }
 }
