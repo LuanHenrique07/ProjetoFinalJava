@@ -110,11 +110,13 @@ public class GerenciadorDeArquivos {
             while (leitor.hasNextLine()) {
                 String linha = leitor.nextLine();
                 String[] dados = linha.split(";");
-                String titulo = dados[0];
-                String autor = dados[1];
-                int ano = Integer.parseInt(dados[2]);
+                int id = Integer.parseInt(dados[0]);
+                String nome = dados[1];
+                String genero = dados[2];
+                int lancamento = Integer.parseInt(dados[3]);
+                String autor = dados[4];
 
-                Livro livro = new Livro(titulo, autor, ano);
+                Livro livro = new Livro(id, nome, genero, lancamento, autor);
                 listaDeLivros.add(livro);
             }
 

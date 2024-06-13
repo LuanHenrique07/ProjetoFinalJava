@@ -1,11 +1,14 @@
 package br.edu.up.models;
 
-public abstract class Livro {
+public class Livro {
     protected int Id;
     protected String Nome;
     protected String Genero;
     protected int Lancamento;
     protected String Autor;
+
+    public Livro() {
+    }
 
     public Livro(int id, String nome, String genero, int lancamento, String autor) {
         Id = id;
@@ -55,12 +58,13 @@ public abstract class Livro {
         Autor = autor;
     }
 
-    public abstract String toCSV();
+    public String toCSV() {
+        return Id + ";" + Nome + ";" + Genero + ";" + Lancamento + ";" + Autor;
+    }
 
     @Override
     public String toString() {
         return "Livro [Id = " + Id + ", Nome = " + Nome + ", Genero = " + Genero + ", Lancamento = " + Lancamento
-                + ", Autor = "
-                + Autor + "]";
+                + ", Autor = " + Autor + "]";
     }
 }
