@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import br.edu.up.daos.GerenciadorDeArquivos;
+import br.edu.up.models.Livro;
 import br.edu.up.models.Cliente;
 import br.edu.up.models.Funcionario;
 
@@ -11,12 +12,18 @@ public class ControleDeClientes {
 
     private GerenciadorDeArquivos gArquivos = new GerenciadorDeArquivos();
 
+    private List<Livro> livros;
     private List<Cliente> clientes;
     private List<Funcionario> funcionarios;
 
     public ControleDeClientes() {
-        this.clientes = gArquivos.getClientes();
-        this.funcionarios = new ArrayList<>(); // Inicializa a lista de funcionários
+        this.livros = gArquivos.getLivros();
+        this.clientes = new ArrayList<>();
+        this.funcionarios = new ArrayList<>();
+    }
+
+    public void incluirLivro(Livro livro) {
+        this.livros.add(livro);
     }
 
     public void incluirCliente(Cliente cliente) {
@@ -27,6 +34,10 @@ public class ControleDeClientes {
         this.funcionarios.add(funcionario);
     }
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
     public List<Cliente> getClientes() {
         return clientes;
     }
@@ -35,26 +46,17 @@ public class ControleDeClientes {
         return funcionarios;
     }
 
-    public Cliente getClientePorCpf(String cpf) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getCPF().equals(cpf)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    public Funcionario getFuncionarioPorCpf(String cpf) {
-        for (Funcionario funcionario : funcionarios) {
-            if (funcionario.getCPF().equals(cpf)) {
-                return funcionario;
+    public Livro getLivroPorNome(String titulo) {
+        for (Livro livro : livros) {
+            if (livro.getNome().equals(titulo)) {
+                return livro;
             }
         }
         return null;
     }
 
     public boolean gravarDados() {
-        return gArquivos.gravar(clientes, funcionarios);
+        return gArquivos.gravar(livros, clientes, funcionarios);
     }
 
 }

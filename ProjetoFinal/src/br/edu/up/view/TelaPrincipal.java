@@ -77,7 +77,7 @@ public class TelaPrincipal {
             Prompt.separador();
 
             Prompt.imprimir("Selecione o gênero do livro:");
-            Prompt.imprimir("1. Ação");
+            Prompt.imprimir("1. Açao");
             Prompt.imprimir("2. Comédia");
             Prompt.imprimir("3. Romance");
             Prompt.imprimir("4. Terror");

@@ -15,6 +15,46 @@ public abstract class Livro {
         Autor = autor;
     }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        Nome = nome;
+    }
+
+    public String getGenero() {
+        return Genero;
+    }
+
+    public void setGenero(String genero) {
+        Genero = genero;
+    }
+
+    public int getLancamento() {
+        return Lancamento;
+    }
+
+    public void setLancamento(int lancamento) {
+        Lancamento = lancamento;
+    }
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public void setAutor(String autor) {
+        Autor = autor;
+    }
+
     public abstract String toCSV();
 
     @Override
