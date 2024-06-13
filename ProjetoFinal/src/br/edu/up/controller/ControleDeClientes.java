@@ -22,15 +22,15 @@ public class ControleDeClientes {
         this.funcionarios = new ArrayList<>();
     }
 
-    public void incluirLivro(Livro livro) {
+    public void adicionarLivro(Livro livro) {
         this.livros.add(livro);
     }
 
-    public void incluirCliente(Cliente cliente) {
+    public void adicionarCliente(Cliente cliente) {
         this.clientes.add(cliente);
     }
 
-    public void incluirFuncionario(Funcionario funcionario) {
+    public void adicionarFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
     }
 

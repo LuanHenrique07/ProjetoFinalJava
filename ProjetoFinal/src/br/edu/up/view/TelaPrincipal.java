@@ -1,9 +1,18 @@
 package br.edu.up.view;
 
 import br.edu.up.Prompt;
-import br.edu.up.models.*;
+import br.edu.up.controller.ControleDeClientes;
+import br.edu.up.models.Cliente;
+import br.edu.up.models.Funcionario;
+import br.edu.up.models.Livro;
+import br.edu.up.models.LivroAcao;
+import br.edu.up.models.LivroComedia;
+import br.edu.up.models.LivroRomance;
+import br.edu.up.models.LivroTerror;
 
 public class TelaPrincipal {
+
+    private ControleDeClientes controleDeClientes = new ControleDeClientes();
 
     public void mostrarMenuPrincipal() {
         int op = 0;
@@ -30,41 +39,27 @@ public class TelaPrincipal {
                     Prompt.imprimir("Livro incluído com sucesso!");
                     break;
                 case 2:
-                    listarLivros();
+                    // implementar listagem de livros
                     break;
                 case 3:
                     adicionarCliente();
                     Prompt.imprimir("Cliente adicionado com sucesso!");
                     break;
                 case 4:
-                    listarClientes();
+                    // implementar listagem de clientes
                     break;
                 case 5:
                     adicionarFuncionario();
                     Prompt.imprimir("Funcionario adicionado com sucesso!");
                     break;
                 case 6:
-                    listarFuncionarios();
+                    // implementar listagem de funcionários
                     break;
             }
 
         } while (op != 7);
 
         Prompt.imprimir("Saindo...");
-    }
-
-    private void listarFuncionarios() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarFuncionarios'");
-    }
-
-    private void listarClientes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarClientes'");
-    }
-
-    private void listarLivros() {
-        // TODO Auto-generated method stub
     }
 
     private void incluirLivro() {
@@ -77,7 +72,7 @@ public class TelaPrincipal {
             Prompt.separador();
 
             Prompt.imprimir("Selecione o gênero do livro:");
-            Prompt.imprimir("1. Açao");
+            Prompt.imprimir("1. Ação");
             Prompt.imprimir("2. Comédia");
             Prompt.imprimir("3. Romance");
             Prompt.imprimir("4. Terror");
@@ -101,7 +96,6 @@ public class TelaPrincipal {
             }
 
         } while (opcao != 5);
-
     }
 
     private void incluirLivroAcao() {
@@ -112,12 +106,11 @@ public class TelaPrincipal {
 
         int id = Prompt.lerInteiro("Digite o ID:");
         String nome = Prompt.lerLinha("Digite o nome do livro:");
-        String genero = "Ação";
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroAcao(nome, id, genero, lancamento, autor);
-        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
+        Livro livro = new LivroAcao(nome, id, "Ação", lancamento, autor);
+        controleDeClientes.adicionarLivro(livro);
     }
 
     private void incluirLivroComedia() {
@@ -128,12 +121,11 @@ public class TelaPrincipal {
 
         int id = Prompt.lerInteiro("Digite o ID:");
         String nome = Prompt.lerLinha("Digite o nome do livro:");
-        String genero = "Comédia";
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroComedia(nome, id, genero, lancamento, autor);
-        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
+        Livro livro = new LivroComedia(nome, id, "Comédia", lancamento, autor);
+        controleDeClientes.adicionarLivro(livro);
     }
 
     private void incluirLivroRomance() {
@@ -144,12 +136,11 @@ public class TelaPrincipal {
 
         int id = Prompt.lerInteiro("Digite o ID:");
         String nome = Prompt.lerLinha("Digite o nome do livro:");
-        String genero = "Romance";
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroRomance(nome, id, genero, lancamento, autor);
-        // Adicionar livro à lista de livros (você precisa implementar essa lógica)
+        Livro livro = new LivroRomance(nome, id, "Romance", lancamento, autor);
+        controleDeClientes.adicionarLivro(livro);
     }
 
     private void incluirLivroTerror() {
@@ -160,12 +151,11 @@ public class TelaPrincipal {
 
         int id = Prompt.lerInteiro("Digite o ID:");
         String nome = Prompt.lerLinha("Digite o nome do livro:");
-        String genero = "Terror";
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroTerror(nome, id, genero, lancamento, autor);
-        // Adicionar livro
+        Livro livro = new LivroTerror(nome, id, "Terror", lancamento, autor);
+        controleDeClientes.adicionarLivro(livro);
     }
 
     private void adicionarCliente() {
@@ -180,13 +170,13 @@ public class TelaPrincipal {
         String endereco = Prompt.lerLinha("Digite o endereço do cliente:");
 
         Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
-        // Adicionar cliente à lista de clientes (você precisa implementar essa lógica)
+        controleDeClientes.adicionarCliente(cliente);
     }
 
     private void adicionarFuncionario() {
         Prompt.limparConsole();
         Prompt.separador();
-        Prompt.imprimir("ADICIONAR FUNCIONARIO");
+        Prompt.imprimir("ADICIONAR FUNCIONÁRIO");
         Prompt.separador();
 
         String nome = Prompt.lerLinha("Digite o nome do funcionário:");
@@ -195,6 +185,6 @@ public class TelaPrincipal {
         String registro = Prompt.lerLinha("Digite o registro do funcionário:");
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
-        // Adicionar funcionário à lista de funcionários (você precisa implementar essa lógica)
+        controleDeClientes.adicionarFuncionario(funcionario);
     }
 }
