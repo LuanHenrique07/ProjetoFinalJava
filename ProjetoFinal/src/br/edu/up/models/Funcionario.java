@@ -28,7 +28,12 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString() {
-        return "Funcionario [Telefone=" + Telefone + ", Registro=" + Registro + "]";
+        return "Funcionario [Telefone = " + Telefone + ", Registro = " + Registro + "]";
+    }
+
+    @Override
+    public String toCSV() {
+        return Nome + ";" + CPF + ";" + Telefone + ";" + Registro;
     }
 
 }

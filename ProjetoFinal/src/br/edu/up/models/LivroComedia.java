@@ -8,7 +8,7 @@ public class LivroComedia extends Livro {
 
     @Override
     public String toCSV() {
-        return Nome + ";" + Genero + ";" + Lancamento + ";" + Autor;
+        return Id + ";" + Nome + ";" + Genero + ";" + Lancamento + ";" + Autor;
     }
 
 }

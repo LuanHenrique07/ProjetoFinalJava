@@ -16,7 +16,11 @@ public class TelaPrincipal {
 
             Prompt.imprimir("1. Incluir Livros");
             Prompt.imprimir("2. Listar Livros");
-            Prompt.imprimir("3. Sair");
+            Prompt.imprimir("3. Adicionar Cliente");
+            Prompt.imprimir("4. Listar Clientes");
+            Prompt.imprimir("5. Adicionar Funcionário");
+            Prompt.imprimir("6. Listar Funcionários");
+            Prompt.imprimir("7. Sair");
 
             op = Prompt.lerInteiro();
 
@@ -28,11 +32,35 @@ public class TelaPrincipal {
                 case 2:
                     listarLivros();
                     break;
+                case 3:
+                    adicionarCliente();
+                    Prompt.imprimir("Cliente adicionado com sucesso!");
+                    break;
+                case 4:
+                    listarClientes();
+                    break;
+                case 5:
+                    adicionarFuncionario();
+                    Prompt.imprimir("Funcionario adicionado com sucesso!");
+                    break;
+                case 6:
+                    listarFuncionarios();
+                    break;
             }
 
-        } while (op != 3);
+        } while (op != 7);
 
         Prompt.imprimir("Saindo...");
+    }
+
+    private void listarFuncionarios() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarFuncionarios'");
+    }
+
+    private void listarClientes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarClientes'");
     }
 
     private void listarLivros() {
@@ -138,5 +166,35 @@ public class TelaPrincipal {
 
         Livro livro = new LivroTerror(nome, id, genero, lancamento, autor);
         // Adicionar livro
+    }
+
+    private void adicionarCliente() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("ADICIONAR CLIENTE");
+        Prompt.separador();
+
+        String nome = Prompt.lerLinha("Digite o nome do cliente:");
+        String cpf = Prompt.lerLinha("Digite o CPF do cliente:");
+        String telefone = Prompt.lerLinha("Digite o telefone do cliente:");
+        String endereco = Prompt.lerLinha("Digite o endereço do cliente:");
+
+        Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
+        // Adicionar cliente à lista de clientes (você precisa implementar essa lógica)
+    }
+
+    private void adicionarFuncionario() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("ADICIONAR FUNCIONARIO");
+        Prompt.separador();
+
+        String nome = Prompt.lerLinha("Digite o nome do funcionário:");
+        String cpf = Prompt.lerLinha("Digite o CPF do funcionário:");
+        String telefone = Prompt.lerLinha("Digite o telefone do funcionário:");
+        String registro = Prompt.lerLinha("Digite o registro do funcionário:");
+
+        Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
+        // Adicionar funcionário à lista de funcionários (você precisa implementar essa lógica)
     }
 }

@@ -27,8 +27,12 @@ public class Cliente extends Pessoa {
     }
 
     @Override
+    public String toString() {
+        return "Cliente [Nome = " + Nome + ", CPF = " + CPF + ", Telefone = " + telefone + ", Endereço = " + endereco + "]";
+    }
+
+    @Override
     public String toCSV() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toCSV'");
+        return CPF + ";" + Nome + ";" + telefone + ";" + endereco;
     }
 }

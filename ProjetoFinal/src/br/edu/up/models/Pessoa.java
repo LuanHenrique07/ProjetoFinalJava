@@ -29,7 +29,7 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa [Nome=" + Nome + ", CPF=" + CPF + "]";
+        return "Pessoa [Nome = " + Nome + ", CPF = " + CPF + "]";
     }
 
 }
