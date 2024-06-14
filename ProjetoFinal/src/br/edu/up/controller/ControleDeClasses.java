@@ -49,10 +49,37 @@ public class ControleDeClasses {
         return funcionarios;
     }
 
-    public Livro getLivroPorNome(String titulo) {
+    // public Livro getLivroPorNome(String titulo) {
+    //     for (Livro livro : livros) {
+    //         if (livro.getNome().equals(titulo)) {
+    //             return livro;
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    public Livro getLivroPorId(int id) {
         for (Livro livro : livros) {
-            if (livro.getNome().equals(titulo)) {
+            if (livro.getId() == id) {
                 return livro;
+            }
+        }
+        return null;
+    }
+
+    public Cliente getClientePorCPF(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCPF().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public Funcionario getFuncionarioPorRegistro(String registro) {
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getRegistro().equals(registro)) {
+                return funcionario;
             }
         }
         return null;

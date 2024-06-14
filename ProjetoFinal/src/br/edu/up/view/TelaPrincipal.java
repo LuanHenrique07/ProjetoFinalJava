@@ -31,7 +31,10 @@ public class TelaPrincipal {
             Prompt.imprimir("4. Listar Clientes");
             Prompt.imprimir("5. Adicionar Funcionário");
             Prompt.imprimir("6. Listar Funcionários");
-            Prompt.imprimir("7. Sair");
+            Prompt.imprimir("7. Buscar Livro por ID");
+            Prompt.imprimir("8. Buscar Cliente por CPF");
+            Prompt.imprimir("9. Buscar Funcionário por Registro");
+            Prompt.imprimir("10. Sair");
 
             op = Prompt.lerInteiro();
 
@@ -54,9 +57,18 @@ public class TelaPrincipal {
                 case 6:
                     listarFuncionarios();
                     break;
+                case 7:
+                    buscarLivroPorId();
+                    break;
+                case 8:
+                    buscarClientePorCPF();
+                    break;
+                case 9:
+                    buscarFuncionarioPorRegistro();
+                    break;
             }
 
-        } while (op != 7);
+        } while (op != 10);
 
         Prompt.imprimir("Saindo...");
     }
@@ -227,6 +239,54 @@ public class TelaPrincipal {
         Prompt.separador();
         for (Funcionario funcionario : funcionarios) {
             Prompt.imprimir(funcionario.toString());
+        }
+        Prompt.pressionarEnter();
+    }
+
+    private void buscarLivroPorId() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("BUSCAR LIVRO POR ID");
+        Prompt.separador();
+
+        int id = Prompt.lerInteiro("Digite o ID do livro:");
+        Livro livro = controleDeClasses.getLivroPorId(id);
+        if (livro != null) {
+            Prompt.imprimir(livro.toString());
+        } else {
+            Prompt.imprimir("Livro não encontrado.");
+        }
+        Prompt.pressionarEnter();
+    }
+
+    private void buscarClientePorCPF() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("BUSCAR CLIENTE POR CPF");
+        Prompt.separador();
+
+        String cpf = Prompt.lerLinha("Digite o CPF do cliente:");
+        Cliente cliente = controleDeClasses.getClientePorCPF(cpf);
+        if (cliente != null) {
+            Prompt.imprimir(cliente.toString());
+        } else {
+            Prompt.imprimir("Cliente não encontrado.");
+        }
+        Prompt.pressionarEnter();
+    }
+
+    private void buscarFuncionarioPorRegistro() {
+        Prompt.limparConsole();
+        Prompt.separador();
+        Prompt.imprimir("BUSCAR FUNCIONÁRIO POR REGISTRO");
+        Prompt.separador();
+
+        String registro = Prompt.lerLinha("Digite o registro do funcionário:");
+        Funcionario funcionario = controleDeClasses.getFuncionarioPorRegistro(registro);
+        if (funcionario != null) {
+            Prompt.imprimir(funcionario.toString());
+        } else {
+            Prompt.imprimir("Funcionário não encontrado.");
         }
         Prompt.pressionarEnter();
     }
