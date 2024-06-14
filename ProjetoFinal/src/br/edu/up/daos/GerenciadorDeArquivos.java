@@ -1,179 +1,158 @@
 package br.edu.up.daos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import br.edu.up.models.Cliente;
 import br.edu.up.models.Funcionario;
 import br.edu.up.models.Livro;
+import br.edu.up.models.LivroAcao;
+import br.edu.up.models.LivroComedia;
+import br.edu.up.models.LivroRomance;
+import br.edu.up.models.LivroTerror;
 
 public class GerenciadorDeArquivos {
 
-    private String header = ""; // Defina seu cabeçalho CSV
-    private String nomeDoArquivoLivros = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
-    private String nomeDoArquivoClientes = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
-    private String nomeDoArquivoFuncionarios = "C:\\Users\\Gabriel\\Desktop\\ProjetoFinalJava";
+    private final String LIVROS_FILE = "livros.csv";
+    private final String CLIENTES_FILE = "clientes.csv";
+    private final String FUNCIONARIOS_FILE = "funcionarios.csv";
+
+    public List<Livro> getLivros() {
+        return lerLivrosDoArquivo(LIVROS_FILE);
+    }
 
     public List<Cliente> getClientes() {
-
-        List<Cliente> listaDeClientes = new ArrayList<>();
-
-        try {
-            // LER UM ARQUIVO DE TEXTO
-            File arquivoLeitura = new File(nomeDoArquivoClientes);
-            Scanner leitor = new Scanner(arquivoLeitura);
-
-            // Armazeno cabeçalho
-            if (leitor.hasNextLine()) {
-                header = leitor.nextLine();
-            }
-
-            // Enquanto tiver linha no arquivo
-            while (leitor.hasNextLine()) {
-                String linha = leitor.nextLine();
-                String[] dados = linha.split(";");
-                String nome = dados[0];
-                String cpf = dados[1];
-                String telefone = dados[2];
-                String endereco = dados[3];
-
-                Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
-                listaDeClientes.add(cliente);
-            }
-
-            leitor.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo de clientes não encontrado! " + e.getMessage());
-        }
-
-        return listaDeClientes;
+        return lerClientesDoArquivo(CLIENTES_FILE);
     }
 
     public List<Funcionario> getFuncionarios() {
-
-        List<Funcionario> listaDeFuncionarios = new ArrayList<>();
-
-        try {
-            // LER UM ARQUIVO DE TEXTO
-            File arquivoLeitura = new File(nomeDoArquivoFuncionarios);
-            Scanner leitor = new Scanner(arquivoLeitura);
-
-            // Armazeno cabeçalho
-            if (leitor.hasNextLine()) {
-                header = leitor.nextLine();
-            }
-
-            // Enquanto tiver linha no arquivo
-            while (leitor.hasNextLine()) {
-                String linha = leitor.nextLine();
-                String[] dados = linha.split(";");
-                String nome = dados[0];
-                String cpf = dados[1];
-                String telefone = dados[2];
-                String registro = dados[3];
-
-                Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
-                listaDeFuncionarios.add(funcionario);
-            }
-
-            leitor.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo de funcionários não encontrado! " + e.getMessage());
-        }
-
-        return listaDeFuncionarios;
-    }
-
-    public List<Livro> getLivros() {
-
-        List<Livro> listaDeLivros = new ArrayList<>();
-
-        try {
-            // LER UM ARQUIVO DE TEXTO
-            File arquivoLeitura = new File(nomeDoArquivoLivros);
-            Scanner leitor = new Scanner(arquivoLeitura);
-
-            // Armazeno cabeçalho
-            if (leitor.hasNextLine()) {
-                header = leitor.nextLine();
-            }
-
-            // Enquanto tiver linha no arquivo
-            while (leitor.hasNextLine()) {
-                String linha = leitor.nextLine();
-                String[] dados = linha.split(";");
-                int id = Integer.parseInt(dados[0]);
-                String nome = dados[1];
-                String genero = dados[2];
-                int lancamento = Integer.parseInt(dados[3]);
-                String autor = dados[4];
-
-                Livro livro = new Livro(id, nome, genero, lancamento, autor);
-                listaDeLivros.add(livro);
-            }
-
-            leitor.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo de livros não encontrado! " + e.getMessage());
-        }
-
-        return listaDeLivros;
+        return lerFuncionariosDoArquivo(FUNCIONARIOS_FILE);
     }
 
     public boolean gravar(List<Livro> livros, List<Cliente> clientes, List<Funcionario> funcionarios) {
-        try {
-            // GRAVAR ARQUIVO DE LIVROS
-            FileWriter arquivoGravar = new FileWriter(nomeDoArquivoLivros);
-            PrintWriter gravador = new PrintWriter(arquivoGravar);
-
-            gravador.println(header);
-
-            for (Livro livro : livros) {
-                gravador.println(livro.toCSV());
-            }
-
-            gravador.close();
-
-            // GRAVAR ARQUIVO DE CLIENTES
-            arquivoGravar = new FileWriter(nomeDoArquivoClientes);
-            gravador = new PrintWriter(arquivoGravar);
-
-            gravador.println(header);
-
-            for (Cliente cliente : clientes) {
-                gravador.println(cliente.toCSV());
-            }
-
-            gravador.close();
-
-            // GRAVAR ARQUIVO DE FUNCIONARIOS
-            arquivoGravar = new FileWriter(nomeDoArquivoFuncionarios);
-            gravador = new PrintWriter(arquivoGravar);
-
-            gravador.println(header);
-
-            for (Funcionario funcionario : funcionarios) {
-                gravador.println(funcionario.toCSV());
-            }
-
-            gravador.close();
-
-            return true;
-
-        } catch (IOException e) {
-            System.out.println("Não foi possível gravar o arquivo! " + e.getMessage());
-        }
-
-        return false;
+        return gravarLivrosNoArquivo(livros, LIVROS_FILE) &&
+               gravarClientesNoArquivo(clientes, CLIENTES_FILE) &&
+               gravarFuncionariosNoArquivo(funcionarios, FUNCIONARIOS_FILE);
     }
 
+    private List<Livro> lerLivrosDoArquivo(String fileName) {
+        List<Livro> livros = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] campos = linha.split(",");
+                if (campos.length == 5) {
+                    int id = Integer.parseInt(campos[0]);
+                    String nome = campos[1];
+                    String genero = campos[2];
+                    int lancamento = Integer.parseInt(campos[3]);
+                    String autor = campos[4];
+                    Livro livro = null;
+                    switch (genero.toLowerCase()) {
+                        case "ação":
+                            livro = new LivroAcao(id, nome, genero, lancamento, autor);
+                            break;
+                        case "comédia":
+                            livro = new LivroComedia(id, nome, genero, lancamento, autor);
+                            break;
+                        case "romance":
+                            livro = new LivroRomance(id, nome, genero, lancamento, autor);
+                            break;
+                        case "terror":
+                            livro = new LivroTerror(id, nome, genero, lancamento, autor);
+                            break;
+                    }
+                    if (livro != null) {
+                        livros.add(livro);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return livros;
+    }
+
+    private List<Cliente> lerClientesDoArquivo(String fileName) {
+        List<Cliente> clientes = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] campos = linha.split(",");
+                if (campos.length == 4) {
+                    String nome = campos[0];
+                    String cpf = campos[1];
+                    String telefone = campos[2];
+                    String endereco = campos[3];
+                    Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
+                    clientes.add(cliente);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+
+    private List<Funcionario> lerFuncionariosDoArquivo(String fileName) {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] campos = linha.split(",");
+                if (campos.length == 4) {
+                    String nome = campos[0];
+                    String cpf = campos[1];
+                    String telefone = campos[2];
+                    String registro = campos[3];
+                    Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
+                    funcionarios.add(funcionario);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return funcionarios;
+    }
+
+    private boolean gravarLivrosNoArquivo(List<Livro> livros, String fileName) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            for (Livro livro : livros) {
+                bw.write(String.format("%d,%s,%s,%d,%s\n", livro.getId(), livro.getNome(), livro.getGenero(), livro.getLancamento(), livro.getAutor()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean gravarClientesNoArquivo(List<Cliente> clientes, String fileName) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            for (Cliente cliente : clientes) {
+                bw.write(String.format("%s,%s,%s,%s\n", cliente.getNome(), cliente.getCPF(), cliente.getTelefone(), cliente.getEndereco()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean gravarFuncionariosNoArquivo(List<Funcionario> funcionarios, String fileName) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            for (Funcionario funcionario : funcionarios) {
+                bw.write(String.format("%s,%s,%s,%s\n", funcionario.getNome(), funcionario.getCPF(), funcionario.getTelefone(), funcionario.getRegistro()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

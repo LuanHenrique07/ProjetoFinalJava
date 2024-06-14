@@ -33,6 +33,6 @@ public class Cliente extends Pessoa {
 
     @Override
     public String toCSV() {
-        return CPF + ";" + Nome + ";" + telefone + ";" + endereco;
+        return Nome + ";" + CPF + ";" + telefone + ";" + endereco;
     }
 }

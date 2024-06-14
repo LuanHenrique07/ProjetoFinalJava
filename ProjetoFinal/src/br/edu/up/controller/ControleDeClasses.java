@@ -8,7 +8,7 @@ import br.edu.up.models.Livro;
 import br.edu.up.models.Cliente;
 import br.edu.up.models.Funcionario;
 
-public class ControleDeClientes {
+public class ControleDeClasses {
 
     private GerenciadorDeArquivos gArquivos = new GerenciadorDeArquivos();
 
@@ -16,22 +16,25 @@ public class ControleDeClientes {
     private List<Cliente> clientes;
     private List<Funcionario> funcionarios;
 
-    public ControleDeClientes() {
+    public ControleDeClasses() {
         this.livros = gArquivos.getLivros();
-        this.clientes = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
+        this.clientes = gArquivos.getClientes(); // Inicializa clientes a partir do CSV
+        this.funcionarios = gArquivos.getFuncionarios(); // Inicializa funcionários a partir do CSV
     }
 
     public void adicionarLivro(Livro livro) {
         this.livros.add(livro);
+        gravarDados(); // Salvar após adicionar livro
     }
 
     public void adicionarCliente(Cliente cliente) {
         this.clientes.add(cliente);
+        gravarDados(); // Salvar após adicionar cliente
     }
 
     public void adicionarFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
+        gravarDados(); // Salvar após adicionar funcionário
     }
 
     public List<Livro> getLivros() {
@@ -58,5 +61,4 @@ public class ControleDeClientes {
     public boolean gravarDados() {
         return gArquivos.gravar(livros, clientes, funcionarios);
     }
-
 }

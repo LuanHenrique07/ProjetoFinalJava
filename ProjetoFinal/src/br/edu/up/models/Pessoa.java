@@ -21,15 +21,14 @@ public abstract class Pessoa {
         return CPF;
     }
 
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCPF(String cpf) {
+        CPF = cpf;
     }
-
-    public abstract String toCSV();
 
     @Override
     public String toString() {
         return "Pessoa [Nome = " + Nome + ", CPF = " + CPF + "]";
     }
 
+    public abstract String toCSV();
 }

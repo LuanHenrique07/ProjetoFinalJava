@@ -3,7 +3,7 @@ package br.edu.up.view;
 import java.util.List;
 
 import br.edu.up.Prompt;
-import br.edu.up.controller.ControleDeClientes;
+import br.edu.up.controller.ControleDeClasses;
 import br.edu.up.models.Cliente;
 import br.edu.up.models.Funcionario;
 import br.edu.up.models.Livro;
@@ -14,7 +14,7 @@ import br.edu.up.models.LivroTerror;
 
 public class TelaPrincipal {
 
-    private ControleDeClientes controleDeClientes = new ControleDeClientes();
+    private ControleDeClasses controleDeClasses = new ControleDeClasses();
 
     public void mostrarMenuPrincipal() {
         int op = 0;
@@ -38,21 +38,18 @@ public class TelaPrincipal {
             switch (op) {
                 case 1:
                     incluirLivro();
-                    Prompt.imprimir("Livro incluído com sucesso!");
                     break;
                 case 2:
                     listarLivros();
                     break;
                 case 3:
                     adicionarCliente();
-                    Prompt.imprimir("Cliente adicionado com sucesso!");
                     break;
                 case 4:
                     listarClientes();
                     break;
                 case 5:
                     adicionarFuncionario();
-                    Prompt.imprimir("Funcionario adicionado com sucesso!");
                     break;
                 case 6:
                     listarFuncionarios();
@@ -85,15 +82,23 @@ public class TelaPrincipal {
             switch (opcao) {
                 case 1:
                     incluirLivroAcao();
+                    Prompt.imprimir("Livro de Ação incluído com sucesso!");
+                    Prompt.pressionarEnter();
                     break;
                 case 2:
                     incluirLivroComedia();
+                    Prompt.imprimir("Livro de Comédia incluído com sucesso!");
+                    Prompt.pressionarEnter();
                     break;
                 case 3:
                     incluirLivroRomance();
+                    Prompt.imprimir("Livro de Romance incluído com sucesso!");
+                    Prompt.pressionarEnter();
                     break;
                 case 4:
                     incluirLivroTerror();
+                    Prompt.imprimir("Livro de Terror incluído com sucesso!");
+                    Prompt.pressionarEnter();
                     break;
             }
 
@@ -111,8 +116,8 @@ public class TelaPrincipal {
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroAcao(nome, id, "Ação", lancamento, autor);
-        controleDeClientes.adicionarLivro(livro);
+        Livro livro = new LivroAcao(id, nome, "Ação", lancamento, autor);
+        controleDeClasses.adicionarLivro(livro);
     }
 
     private void incluirLivroComedia() {
@@ -126,8 +131,8 @@ public class TelaPrincipal {
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroComedia(nome, id, "Comédia", lancamento, autor);
-        controleDeClientes.adicionarLivro(livro);
+        Livro livro = new LivroComedia(id, nome, "Comédia", lancamento, autor);
+        controleDeClasses.adicionarLivro(livro);
     }
 
     private void incluirLivroRomance() {
@@ -141,8 +146,8 @@ public class TelaPrincipal {
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroRomance(nome, id, "Romance", lancamento, autor);
-        controleDeClientes.adicionarLivro(livro);
+        Livro livro = new LivroRomance(id, nome, "Romance", lancamento, autor);
+        controleDeClasses.adicionarLivro(livro);
     }
 
     private void incluirLivroTerror() {
@@ -156,8 +161,8 @@ public class TelaPrincipal {
         int lancamento = Prompt.lerInteiro("Digite o ano de lançamento:");
         String autor = Prompt.lerLinha("Digite o autor:");
 
-        Livro livro = new LivroTerror(nome, id, "Terror", lancamento, autor);
-        controleDeClientes.adicionarLivro(livro);
+        Livro livro = new LivroTerror(id, nome, "Terror", lancamento, autor);
+        controleDeClasses.adicionarLivro(livro);
     }
 
     private void adicionarCliente() {
@@ -172,7 +177,7 @@ public class TelaPrincipal {
         String endereco = Prompt.lerLinha("Digite o endereço do cliente:");
 
         Cliente cliente = new Cliente(nome, cpf, telefone, endereco);
-        controleDeClientes.adicionarCliente(cliente);
+        controleDeClasses.adicionarCliente(cliente);
     }
 
     private void adicionarFuncionario() {
@@ -187,11 +192,11 @@ public class TelaPrincipal {
         String registro = Prompt.lerLinha("Digite o registro do funcionário:");
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone, registro);
-        controleDeClientes.adicionarFuncionario(funcionario);
+        controleDeClasses.adicionarFuncionario(funcionario);
     }
 
     private void listarLivros() {
-        List<Livro> livros = controleDeClientes.getLivros();
+        List<Livro> livros = controleDeClasses.getLivros();
         Prompt.limparConsole();
         Prompt.separador();
         Prompt.imprimir("LISTA DE LIVROS");
@@ -203,7 +208,7 @@ public class TelaPrincipal {
     }
 
     private void listarClientes() {
-        List<Cliente> clientes = controleDeClientes.getClientes();
+        List<Cliente> clientes = controleDeClasses.getClientes();
         Prompt.limparConsole();
         Prompt.separador();
         Prompt.imprimir("LISTA DE CLIENTES");
@@ -215,7 +220,7 @@ public class TelaPrincipal {
     }
 
     private void listarFuncionarios() {
-        List<Funcionario> funcionarios = controleDeClientes.getFuncionarios();
+        List<Funcionario> funcionarios = controleDeClasses.getFuncionarios();
         Prompt.limparConsole();
         Prompt.separador();
         Prompt.imprimir("LISTA DE FUNCIONÁRIOS");
